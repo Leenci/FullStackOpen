@@ -1,34 +1,32 @@
 const PersonForm = ({newName, newNumber, setName, setNumber, setPerson, listPerson}) => {
     const addPerson = (event) => {
         event.preventDefault()
-        if (newNumber === "" || newNumber === ""){
+        if (newName === "" || newNumber === ""){
             alert("Fill in all fields")
         }
         else{
-            for (const person of listPerson){
-                if (person.name != newName){
-                    if(person.number != newNumber){
+               if (listPerson.some(e => e.name === newName)){
+                    alert(`${newName} is already added to phonebook`)
+                    
+                }else{
+                    if(listPerson.some(e => e.number === newNumber)){
+                        alert(`${newNumber} is already added to phonebook`)
+                        
+                    }
+                    else {
                         const personObject = {
                             name: newName,
                             number: newNumber,
                             id: listPerson.length + 1
                         }
-                    setPerson(listPerson.concat(personObject))
-                    setName('')
-                    setNumber('')
-                    console.log("ok")
-                    break }
-                    else {
-                        alert(`${newNumber} is already added to phonebook`)
-                        break
+                        setPerson(listPerson.concat(personObject))
+                        setName('')
+                        setNumber('')
                     }
-                }else{
-                    alert(`${newName} is already added to phonebook`)
-                    break
                 }
         }
     }
-    }
+    
     const handleNameChange = (event) => {
         setName(event.target.value)
     }
@@ -59,6 +57,6 @@ const PersonForm = ({newName, newNumber, setName, setNumber, setPerson, listPers
             
         </form>
     )
-}
+    }
 
 export default PersonForm
