@@ -36,11 +36,28 @@ const PersonForm = ({newName, newNumber, setName, setNumber, setPerson, listPers
         setNumber(event.target.value)
     }
     return (
-                <form onSubmit={addPerson}>
-                    <div>Name:  <input value={newName} onChange={handleNameChange}/></div> 
-                    <div>Number:<input value={newNumber} onChange={handleNumberChange}/></div>
-                    <div><button type="submit" >add</button></div>
-                </form>
+        
+        <form onSubmit={addPerson}>
+            <table>
+                <thead>
+                <tr><td><h2>Add a new:</h2></td></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><p>Name:</p></td>  
+                        <td><input value={newName} onChange={handleNameChange}/></td>
+                    </tr> 
+                    <tr>
+                        <td>Number:</td>
+                        <td><input value={newNumber} onChange={handleNumberChange}/></td>
+                    </tr>
+                    <tr>
+                        <td><button type="submit" >add</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </form>
     )
 }
 

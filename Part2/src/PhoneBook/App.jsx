@@ -10,9 +10,8 @@ const App = () => {
 
     return(
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
         <PersonForm newName={newName} setName={setName} newNumber={newNumber} setNumber={setNumber} setPerson={setPerson} listPerson={persons} />
-      <h2>Numbers</h2>
         <Persons listPerson={persons}/>
     </div>
     )
