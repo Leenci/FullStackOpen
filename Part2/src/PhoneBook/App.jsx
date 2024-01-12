@@ -11,7 +11,7 @@ const App = () => {
     const [ showAll, setShow ] = useState(false)
 
     const personsShows = showAll
-    ? persons.filter( person => person.name === showAll)
+    ? persons.filter( person => person.name.toLowerCase().includes(showAll))
     : persons
 
 

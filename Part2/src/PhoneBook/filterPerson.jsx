@@ -1,6 +1,7 @@
 const Filter = ({filter, setShow}) =>{
     const HanldeFilter = (event) => {
-        setShow(event.target.value)
+        const valueFilter = event.target.value
+        setShow(valueFilter)
     }
 return(
     <table>

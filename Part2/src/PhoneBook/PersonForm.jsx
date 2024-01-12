@@ -7,11 +7,9 @@ const PersonForm = ({newName, newNumber, setName, setNumber, setPerson, listPers
         else{
                if (listPerson.some(e => e.name === newName)){
                     alert(`${newName} is already added to phonebook`)
-                    
                 }else{
                     if(listPerson.some(e => e.number === newNumber)){
-                        alert(`${newNumber} is already added to phonebook`)
-                        
+                        alert(`${newNumber} is already added to phonebook`)  
                     }
                     else {
                         const personObject = {
@@ -26,7 +24,6 @@ const PersonForm = ({newName, newNumber, setName, setNumber, setPerson, listPers
                 }
         }
     }
-    
     const handleNameChange = (event) => {
         setName(event.target.value)
     }
@@ -34,7 +31,6 @@ const PersonForm = ({newName, newNumber, setName, setNumber, setPerson, listPers
         setNumber(event.target.value)
     }
     return (
-        
         <form onSubmit={addPerson}>
             <table>
                 <thead>
@@ -54,9 +50,7 @@ const PersonForm = ({newName, newNumber, setName, setNumber, setPerson, listPers
                     </tr>
                 </tbody>
             </table>
-            
         </form>
     )
     }
-
 export default PersonForm
