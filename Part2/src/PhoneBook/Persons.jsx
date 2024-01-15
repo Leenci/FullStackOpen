@@ -1,4 +1,21 @@
-const Persons = ({listPerson}) => {
+import personServices from "./personServices"
+
+const Persons = ({listPerson, setPerson}) => {
+    const handleDelete = (id) =>{
+        console.log(id)
+        let name = ""
+        listPerson.filter(person => {
+            if(person.id === id){
+                name = person.name
+            }
+        })
+        
+        if (window.confirm(` delete ${name} ?`)) {
+            personServices
+            .deleteId(id)
+            const newPersons = listPerson.filter((person) => person.id != id)
+            setPerson(newPersons)
+    }}
     return (
             <table>
                 <thead>
@@ -10,6 +27,7 @@ const Persons = ({listPerson}) => {
                         <td>{person.name}</td>
                         <td>{">>>>>"}</td>
                         <td><strong>{person.number}</strong></td>
+                        <td><button onClick={() => handleDelete(person.id)}>Delete</button></td>
                     </tr>
                     ))}
                 </tbody>

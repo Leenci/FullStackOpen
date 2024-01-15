@@ -1,3 +1,5 @@
+import personServices from "./personServices"
+
 const PersonForm = ({newName, newNumber, setName, setNumber, setPerson, listPerson}) => {
     const addPerson = (event) => {
         event.preventDefault()
@@ -6,20 +8,43 @@ const PersonForm = ({newName, newNumber, setName, setNumber, setPerson, listPers
         }
         else{
                if (listPerson.some(e => e.name === newName)){
-                    alert(`${newName} is already added to phonebook`)
+                    if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+                        listPerson.some(e => {
+                            if(e.name === newName){
+                                const id = e.id
+                                const person = listPerson.find(n => n.id === id)
+                                const changedPerson = { ...person, number: newNumber }
+                                personServices
+                                .update(id, changedPerson)
+                                .then(response => {
+                                    setPerson(listPerson.map(person => person.id !== id ? person : response))
+                                    setName('')
+                                    setNumber('')
+                                })
+                            }
+                        })
+                      }
                 }else{
                     if(listPerson.some(e => e.number === newNumber)){
                         alert(`${newNumber} is already added to phonebook`)  
                     }
                     else {
+                        const newID = listPerson.length + 1
+                        const newId = newID.toString()
                         const personObject = {
-                            name: newName,
-                            number: newNumber,
-                            id: listPerson.length + 1
+                            "id": newId,
+                            "name": newName,
+                            "number": newNumber
+                            
                         }
-                        setPerson(listPerson.concat(personObject))
-                        setName('')
-                        setNumber('')
+                        personServices
+                        .create(personObject)
+                        .then(response => {
+                            setPerson(listPerson.concat(response))
+                            setName('')
+                            setNumber('')
+                        })
+                        
                     }
                 }
         }
