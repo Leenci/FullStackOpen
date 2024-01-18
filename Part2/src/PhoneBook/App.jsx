@@ -1,37 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import PersonForm from './PersonForm'
-import Persons from './Persons'
-import Filter from './filterPerson'
-// import {listPerson} from './ListPersons'
-import personServices from './personServices'
-const App = () => {
-    
-    const [ persons, setPerson ] = useState([]) 
-    const [ newName, setName ] = useState('')
-    const [ newNumber, setNumber ] = useState('')
-    const [ showAll, setShow ] = useState(false)
 
+//import components
+import ContactForm  from './Components/ContactForm'
+import ListContact from  './Components/ListContact'
+import Filter      from   './Components/filterContact'
+
+//import services (backend)
+import ContactServices from './Services/contactServices'
+
+const App = () => {
+    const [ listContact, setContact ] = useState([]) 
     useEffect(()=>{
-      personServices
+      ContactServices
       .getAll()
       .then(response =>{
-        setPerson(response)
+        setContact(response)
       })  
     }, [])
-
-    
-
-    const personsShows = showAll
-    ? persons.filter( person => person.name.toLowerCase().includes(showAll))
-    : persons
-
 
     return(
     <div>
       <h1>Phonebook</h1>
-        <Filter setShow={setShow}/>
-        <PersonForm newName={newName} setName={setName} newNumber={newNumber} setNumber={setNumber} setPerson={setPerson} listPerson={persons} />
-        <Persons listPerson={personsShows} setPerson={setPerson}/>
+        <Filter       setContact={setContact}  listContact={listContact}/>
+        <ContactForm  />
+        <ListContact  setContact={setContact}  listContact={listContact}/>
+        
     </div>
     )
 }
